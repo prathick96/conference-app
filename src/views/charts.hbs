@@ -1,0 +1,112 @@
+<h1 class="text-center">Data Charts</h1>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <h3>Attendees by Profession</h3><br />
+      <canvas id="profession" data-profession="{{professionData}}"></canvas>
+      <br>
+    </div>
+    <div class="col-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h3>Male to Female Ratio</h3>
+      <canvas id="gender" data-gender="{{genderData}}"></canvas>
+      <br>
+    </div>
+    <div class="col-6">
+      <h3>Years of Experience</h3>
+      <canvas id="exp" data-experience="{{experienceData}}"></canvas>
+      <br>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+  var _profession = document.getElementById('profession').getContext('2d');
+  var _gendr = document.getElementById('gender').getContext('2d');
+  var _exp = document.getElementById('exp').getContext('2d');
+
+  var profession = new Chart(_profession, {
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: document.getElementById('profession').getAttribute("data-profession").split(","),
+        backgroundColor: [
+          'rgb(255, 136, 110)',
+          'rgb(255, 251, 133)',
+          'rgb(110, 255, 209)',
+          'rgb(133, 194, 255)',
+        ],
+      }],
+      labels: [
+        'IT',
+        'Management',
+        'Student',
+        'Content Writer'
+      ]
+    },
+    options: {
+      responsive: true,
+      legend: {
+        position: 'top',
+      },
+      animation: {
+        animateScale: true,
+        animateRotate: true
+      }
+    }
+
+  });
+  var gender = new Chart(_gendr, {
+    type: 'pie',
+    data: {
+      labels: ['Female', 'Male'],
+      datasets: [{
+        label: '# of Votes',
+        data: document.getElementById('gender').getAttribute("data-gender").split(","),
+        backgroundColor: [
+          'rgb(255, 77, 77)',
+          'rgb(153, 204, 255)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+  var exp = new Chart(_exp, {
+    type: 'bar',
+    data: {
+      labels: ['0-2', '3-6', '6+'],
+      datasets: [{
+        data: document.getElementById('exp').getAttribute("data-experience").split(","),
+        backgroundColor: [
+          'rgb(255, 136, 110)',
+          'rgb(255, 251, 133)',
+          'rgb(110, 255, 209)'
+        ]
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>

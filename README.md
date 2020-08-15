@@ -1,2 +1,2 @@
-# conference-app
+# friends-app
 Created with CodeSandbox
